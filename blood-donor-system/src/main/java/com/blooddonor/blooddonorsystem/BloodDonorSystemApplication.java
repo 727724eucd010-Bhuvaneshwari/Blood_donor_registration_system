@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BloodDonorSystemApplication {
 
 	public static void main(String[] args) {
+
+		System.out.println("Blood Donor System Application is starting...");
 		SpringApplication.run(BloodDonorSystemApplication.class, args);
 	}
 
