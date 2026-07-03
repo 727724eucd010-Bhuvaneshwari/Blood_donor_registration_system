@@ -11,5 +11,4 @@ public class BloodDonorSystemApplication {
 		System.out.println("Blood Donor System Application is starting...");
 		SpringApplication.run(BloodDonorSystemApplication.class, args);
 	}
-
 }
