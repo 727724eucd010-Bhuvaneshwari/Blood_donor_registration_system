@@ -1,0 +1,246 @@
+/* =========================
+   GLOBAL
+========================= */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f7fa;
+  font-family: "Segoe UI", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: white !important;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ffe6e6 !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.dropdown-menu {
+  border-radius: 12px;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+  min-height: 85vh;
+  background: linear-gradient(135deg, #dc3545, #b71c1c);
+  display: flex;
+  align-items: center;
+}
+
+.hero-section h1 {
+  font-weight: bold;
+}
+
+.hero-section img {
+  border-radius: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+  border: none;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,.15);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+  border-radius: 10px;
+}
+
+.btn-danger {
+  background: #dc3545;
+}
+
+.btn-danger:hover {
+  background: #bb2d3b;
+}
+
+/* =========================
+   LOGIN & REGISTER
+========================= */
+
+.login-left,
+.register-left {
+  background: linear-gradient(135deg, #dc3545, #b71c1c);
+  color: white;
+}
+
+.form-control,
+.form-select {
+  border-radius: 10px;
+  height: 48px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  border-color: #dc3545;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-title {
+  font-weight: bold;
+}
+
+.dashboard-card {
+  border-radius: 15px;
+}
+
+.dashboard-card h2 {
+  font-weight: bold;
+}
+
+/* =========================
+   STAT CARD
+========================= */
+
+.stat-card {
+  transition: .3s;
+}
+
+.stat-card:hover {
+  transform: scale(1.03);
+}
+
+/* =========================
+   DONOR CARD
+========================= */
+
+.badge {
+  font-size: 14px;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+input[type="text"] {
+  border-radius: 12px;
+}
+
+/* =========================
+   URGENT REQUEST
+========================= */
+
+textarea {
+  border-radius: 10px;
+}
+
+.alert {
+  border-radius: 12px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  margin-top: 80px;
+}
+
+footer h3,
+footer h5 {
+  color: white;
+}
+
+footer p,
+footer li {
+  color: #ddd;
+}
+
+footer hr {
+  border-color: rgba(255,255,255,.2);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc3545;
+  border-radius: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:768px) {
+
+  .navbar-brand {
+    font-size: 22px;
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .hero-section img {
+    margin-top: 30px;
+  }
+
+  .display-3 {
+    font-size: 38px;
+  }
+
+  .display-5 {
+    font-size: 28px;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+}
