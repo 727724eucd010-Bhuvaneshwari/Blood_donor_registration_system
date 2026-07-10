@@ -1,3 +1,4 @@
+
 package com.blooddonor.blooddonorsystem.model;
 
 import jakarta.persistence.Entity;
