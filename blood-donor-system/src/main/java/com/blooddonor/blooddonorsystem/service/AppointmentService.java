@@ -31,13 +31,11 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public List<Appointment> getAppointmentsByDonor(Long donorId) {
-        return appointmentRepository.findByDonorId(donorId);
-    }
+  public List<Appointment> getAppointmentsByDonor(Long donorId) {
+    return appointmentRepository.findByDonor_Id(donorId);
+}
 
-    // This same method answers FR5 (Donation History) —
-    // a "donation" is just an appointment with status = completed
-    public List<Appointment> getDonationHistory(Long donorId) {
-        return appointmentRepository.findByDonorIdAndStatus(donorId, "completed");
-    }
+public List<Appointment> getDonationHistory(Long donorId) {
+    return appointmentRepository.findByDonor_IdAndStatus(donorId, "completed");
+}
 }

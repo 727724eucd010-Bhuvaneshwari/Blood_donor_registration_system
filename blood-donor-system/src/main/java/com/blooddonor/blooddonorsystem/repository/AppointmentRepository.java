@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.blooddonor.blooddonorsystem.model.Appointment;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-
-    List<Appointment> findByDonorId(Long donorId);
-
-    List<Appointment> findByDonorIdAndStatus(Long donorId, String status);
+    List<Appointment> findByDonor_Id(Long donorId);
+    List<Appointment> findByDonor_IdAndStatus(Long donorId, String status);
 }
