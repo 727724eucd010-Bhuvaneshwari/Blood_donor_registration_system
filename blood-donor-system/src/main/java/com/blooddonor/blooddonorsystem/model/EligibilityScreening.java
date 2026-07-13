@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +16,9 @@ public class EligibilityScreening {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long screeningId;
 
-    private Long donorId;
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    private Donor donor;
 
     private boolean recentTravel;
     private boolean recentIllness;
@@ -33,12 +37,12 @@ public class EligibilityScreening {
         this.screeningId = screeningId;
     }
 
-    public Long getDonorId() {
-        return donorId;
+    public Donor getDonor() {
+        return donor;
     }
 
-    public void setDonorId(Long donorId) {
-        this.donorId = donorId;
+    public void setDonor(Donor donor) {
+        this.donor = donor;
     }
 
     public boolean isRecentTravel() {

@@ -1,7 +1,14 @@
 package com.blooddonor.blooddonorsystem.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "appointments")
@@ -11,14 +18,17 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
 
-    private Long donorId;
-    private Long centerId;
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    private Donor donor;
+
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private BloodBank bloodBank;
 
     private LocalDate appointmentDate;
 
-    private String status = "booked";   // booked, cancelled, completed
-
-    // Getters and Setters
+    private String status = "booked";
 
     public Long getAppointmentId() {
         return appointmentId;
@@ -28,20 +38,20 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public Long getDonorId() {
-        return donorId;
+    public Donor getDonor() {
+        return donor;
     }
 
-    public void setDonorId(Long donorId) {
-        this.donorId = donorId;
+    public void setDonor(Donor donor) {
+        this.donor = donor;
     }
 
-    public Long getCenterId() {
-        return centerId;
+    public BloodBank getBloodBank() {
+        return bloodBank;
     }
 
-    public void setCenterId(Long centerId) {
-        this.centerId = centerId;
+    public void setBloodBank(BloodBank bloodBank) {
+        this.bloodBank = bloodBank;
     }
 
     public LocalDate getAppointmentDate() {
