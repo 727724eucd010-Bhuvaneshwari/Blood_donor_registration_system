@@ -26,8 +26,7 @@ public class EligibilityScreening {
     private boolean recentTattooOrSurgery;
 
     private String result;
-
-    // Getters and Setters
+ 
 
     public Long getScreeningId() {
         return screeningId;

@@ -1,12 +1,13 @@
 package com.blooddonor.blooddonorsystem.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.blooddonor.blooddonorsystem.dto.LoginRequest;
 import com.blooddonor.blooddonorsystem.dto.RegisterRequest;
 import com.blooddonor.blooddonorsystem.model.User;
 import com.blooddonor.blooddonorsystem.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
@@ -16,7 +17,7 @@ public class AuthService {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Register a new user
+   
     public String register(RegisterRequest request) {
 
         User existingUser = userRepository.findByEmail(request.getEmail());
@@ -37,7 +38,7 @@ public class AuthService {
         return "Registration successful";
     }
 
-    // Login an existing user
+
     public String login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail());

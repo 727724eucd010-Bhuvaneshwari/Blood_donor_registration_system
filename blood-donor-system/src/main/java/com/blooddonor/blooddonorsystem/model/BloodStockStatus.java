@@ -16,7 +16,7 @@ public class BloodStockStatus {
 
     private String bloodGroup;
     private String region;
-    private String statusLevel;   // critical, low, stable, good
+    private String statusLevel;   
 
     // Getters and Setters
 

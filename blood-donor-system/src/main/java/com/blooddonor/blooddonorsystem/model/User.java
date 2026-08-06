@@ -20,12 +20,11 @@ public class User {
     private String email;
     private String phoneNumber;
     private String passwordHash;
-    private String role;          // e.g. "DONOR" or "ADMIN"
+    private String role;          
     private boolean isActive = true;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Getters and Setters
-
+    
     public Long getUserId() {
         return userId;
     }
