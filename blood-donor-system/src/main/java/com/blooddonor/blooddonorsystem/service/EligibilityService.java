@@ -14,7 +14,7 @@ public class EligibilityService {
 
     public EligibilityScreening checkEligibility(EligibilityScreening screening) {
 
-        // Simple rule: if any answer is true, donor may not be eligible
+      
         if (screening.isRecentTravel() || screening.isRecentIllness()
                 || screening.isOnMedication() || screening.isRecentTattooOrSurgery()) {
 

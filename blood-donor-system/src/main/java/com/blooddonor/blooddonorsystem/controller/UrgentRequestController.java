@@ -23,19 +23,17 @@ public class UrgentRequestController {
     @Autowired
     private UrgentRequestService urgentRequestService;
 
-    // Create a new urgent request
     @PostMapping
     public UrgentRequest createRequest(@RequestBody UrgentRequest request) {
         return urgentRequestService.createRequest(request);
     }
 
-    // Get all active requests
     @GetMapping
     public List<UrgentRequest> getActiveRequests() {
         return urgentRequestService.getActiveRequests();
     }
 
-    // Get matching donors for a specific request
+    
     @GetMapping("/{id}/matches")
     public List<Donor> getMatchingDonors(@PathVariable Long id) {
         return urgentRequestService.findMatchingDonors(id);
