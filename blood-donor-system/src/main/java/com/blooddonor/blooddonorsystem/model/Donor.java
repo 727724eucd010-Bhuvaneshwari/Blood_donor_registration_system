@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Donor {
@@ -17,8 +18,11 @@ public class Donor {
 
     private String name;
     private String email;
+    private String phoneNumber;
     private String bloodGroup;
     private String city;
+    private String gender;
+    private Integer age;
     private LocalDate nextEligibleDate;
 
     Donor() {
@@ -75,5 +79,34 @@ public class Donor {
 
     public void setNextEligibleDate(LocalDate nextEligibleDate) {
         this.nextEligibleDate = nextEligibleDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    @Transient
+    public boolean isAvailable() {
+        return nextEligibleDate == null || !nextEligibleDate.isAfter(LocalDate.now());
     }
 }

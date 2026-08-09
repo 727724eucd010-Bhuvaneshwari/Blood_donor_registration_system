@@ -1,68 +1,30 @@
 package com.blooddonor.blooddonorsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
 public class UrgentRequest {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestId;
-
+    private String patientName;
     private String bloodGroup;
     private int quantityRequired;
     private String requestingFacility;
     private String city;
+    private String contactNumber;
+    private String urgency = "HIGH";
     private String status = "active";
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Long getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(Long requestId) {
-        this.requestId = requestId;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
-
-    public int getQuantityRequired() {
-        return quantityRequired;
-    }
-
-    public void setQuantityRequired(int quantityRequired) {
-        this.quantityRequired = quantityRequired;
-    }
-
-    public String getRequestingFacility() {
-        return requestingFacility;
-    }
-
-    public void setRequestingFacility(String requestingFacility) {
-        this.requestingFacility = requestingFacility;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public Long getRequestId(){return requestId;} public void setRequestId(Long v){requestId=v;}
+    public String getPatientName(){return patientName;} public void setPatientName(String v){patientName=v;}
+    public String getBloodGroup(){return bloodGroup;} public void setBloodGroup(String v){bloodGroup=v;}
+    public int getQuantityRequired(){return quantityRequired;} public void setQuantityRequired(int v){quantityRequired=v;}
+    public String getRequestingFacility(){return requestingFacility;} public void setRequestingFacility(String v){requestingFacility=v;}
+    public String getCity(){return city;} public void setCity(String v){city=v;}
+    public String getContactNumber(){return contactNumber;} public void setContactNumber(String v){contactNumber=v;}
+    public String getUrgency(){return urgency;} public void setUrgency(String v){urgency=v;}
+    public String getStatus(){return status;} public void setStatus(String v){status=v;}
+    public LocalDateTime getCreatedAt(){return createdAt;} public void setCreatedAt(LocalDateTime v){createdAt=v;}
 }

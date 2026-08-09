@@ -1,0 +1,95 @@
+/* =========================================
+   BloodConnect Home Page
+   Professional Font Sizing
+========================================= */
+
+.home-page {
+  font-size: 1rem;
+}
+
+
+/* ---------- Hero ---------- */
+
+.home-page .gov-banner h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.home-page .gov-banner p {
+  font-size: 1.12rem;
+  line-height: 1.75;
+  max-width: 760px;
+}
+
+.home-page .gov-banner .btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+
+/* ---------- Quick Action Tiles ---------- */
+
+.home-page .gov-tile strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.home-page .gov-tile span:not(.tile-icon) {
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.home-page .gov-tile .tile-icon {
+  font-size: 1.5rem;
+}
+
+
+/* ---------- About Section ---------- */
+
+.home-page .gov-section-title h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.home-page .gov-section-title p {
+  font-size: 1rem;
+}
+
+
+/* ---------- Workflow Cards ---------- */
+
+.home-page .workflow-card h5 {
+  font-size: 1.12rem;
+}
+
+.home-page .workflow-card p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+
+  .home-page .gov-banner h1 {
+    font-size: 2.2rem;
+  }
+
+  .home-page .gov-banner p {
+    font-size: 1rem;
+  }
+
+  .home-page .gov-section-title h2 {
+    font-size: 1.6rem;
+  }
+
+  .home-page .gov-tile strong {
+    font-size: 0.95rem;
+  }
+
+  .home-page .gov-tile span:not(.tile-icon) {
+    font-size: 0.82rem;
+  }
+}

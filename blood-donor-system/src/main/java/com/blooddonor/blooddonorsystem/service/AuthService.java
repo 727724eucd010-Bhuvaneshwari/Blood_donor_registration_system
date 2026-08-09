@@ -1,57 +1,65 @@
 package com.blooddonor.blooddonorsystem.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.blooddonor.blooddonorsystem.dto.AuthResponse;
 import com.blooddonor.blooddonorsystem.dto.LoginRequest;
 import com.blooddonor.blooddonorsystem.dto.RegisterRequest;
 import com.blooddonor.blooddonorsystem.model.User;
 import com.blooddonor.blooddonorsystem.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import com.blooddonor.blooddonorsystem.security.JwtUtil;
 
 @Service
 public class AuthService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private UserRepository userRepository;
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    // Register a new user
-    public String register(RegisterRequest request) {
-
-        User existingUser = userRepository.findByEmail(request.getEmail());
-
-        if (existingUser != null) {
-            return "Email already registered";
+    public AuthResponse register(RegisterRequest request) {
+        if (request.getEmail() == null || request.getPassword() == null ||
+                request.getFullName() == null || request.getEmail().isBlank() || request.getPassword().length() < 8) {
+            throw new IllegalArgumentException("Name, email and password (minimum 8 characters) are required");
         }
 
+        User existing = userRepository.findByEmail(request.getEmail().trim().toLowerCase());
+        if (existing != null)
+            throw new IllegalArgumentException("Email already registered");
+
         User user = new User();
-        user.setFullName(request.getFullName());
-        user.setEmail(request.getEmail());
+        user.setFullName(request.getFullName().trim());
+        user.setEmail(request.getEmail().trim().toLowerCase());
         user.setPhoneNumber(request.getPhoneNumber());
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setRole("DONOR");
-
+        user.setActive(true);
         userRepository.save(user);
 
-        return "Registration successful";
+        return issue(user);
     }
 
-    // Login an existing user
-    public String login(LoginRequest request) {
-
-        User user = userRepository.findByEmail(request.getEmail());
-
-        if (user == null) {
-            return "User not found";
+    public AuthResponse login(LoginRequest request) {
+        User user = userRepository.findByEmail(request.getEmail().trim().toLowerCase());
+        if (user == null || !user.isActive()
+                || !passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            throw new IllegalArgumentException("Invalid email or password");
         }
+        return issue(user);
+    }
 
-        boolean passwordMatches = passwordEncoder.matches(request.getPassword(), user.getPasswordHash());
+    private AuthResponse issue(User user) {
+        return new AuthResponse(
+                generateJwtToken(user),
+                user.getFullName(), user.getEmail(), user.getRole());
+    }
 
-        if (!passwordMatches) {
-            return "Incorrect password";
-        }
-
-        return "Login successful";
+    private String generateJwtToken(User user) {
+        return jwtUtil.generateToken(user.getEmail(), user.getRole(), user.getFullName());
     }
 }

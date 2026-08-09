@@ -1,144 +1,208 @@
 import { Link } from "react-router-dom";
-import { FaHeartbeat, FaTint, FaUserFriends } from "react-icons/fa";
+import {
+  FaTint,
+  FaHospital,
+  FaClipboardCheck,
+  FaUserPlus,
+  FaCalendarCheck,
+  FaBolt
+} from "react-icons/fa";
+import "./Home.css";
 
 function Home() {
+
+  const tiles = [
+    {
+      icon: <FaTint />,
+      title: "Blood Availability",
+      desc: "Check live donor pool by blood group",
+      to: "/donors"
+    },
+    {
+      icon: <FaHospital />,
+      title: "Blood Bank Directory",
+      desc: "Find verified centers near you",
+      to: "/centers"
+    },
+    {
+      icon: <FaBolt />,
+      title: "Emergency Request",
+      desc: "Raise an urgent blood requirement",
+      to: "/urgent"
+    },
+    {
+      icon: <FaUserPlus />,
+      title: "Donor Registration",
+      desc: "Register as a voluntary blood donor",
+      to: "/donor-register"
+    },
+    {
+      icon: <FaClipboardCheck />,
+      title: "Eligibility Screening",
+      desc: "Check if you can donate today",
+      to: "/eligibility"
+    },
+    {
+      icon: <FaCalendarCheck />,
+      title: "Book Appointment",
+      desc: "Schedule your donation visit",
+      to: "/appointments"
+    }
+  ];
+
   return (
-    <>
+    <div className="home-page">
+
       {/* Hero Section */}
-      <section
-        className="text-white"
-        style={{
-          background:
-            "linear-gradient(to right, #dc3545, #c82333)",
-          minHeight: "85vh",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+      <section className="gov-banner">
         <div className="container">
 
-          <div className="row align-items-center">
+          <h1>
+            Blood Donor Coordination Portal
+          </h1>
 
-            <div className="col-lg-6">
+          <p>
+            A centralized platform connecting voluntary blood donors,
+            blood banks, and hospitals — supporting eligibility screening,
+            verified center discovery, and compatibility-based emergency
+            donor matching.
+          </p>
 
-              <h1 className="display-3 fw-bold">
-                Donate Blood
-              </h1>
+          <div className="mt-4">
 
-              <h2 className="display-5 mb-4">
-                Save Someone's Life ❤️
-              </h2>
+            <Link
+              to="/urgent"
+              className="btn btn-danger me-3"
+            >
+              Request Blood
+            </Link>
 
-              <p className="lead">
-
-                A single blood donation can save
-                up to three lives.
-
-                Join our BloodConnect community today.
-
-              </p>
-
-              <Link
-                to="/register"
-                className="btn btn-light btn-lg mt-3 me-3"
-              >
-                Become Donor
-              </Link>
-
-              <Link
-                to="/donors"
-                className="btn btn-outline-light btn-lg mt-3"
-              >
-                Find Donor
-              </Link>
-
-            </div>
-
-            <div className="col-lg-6 text-center">
-
-              <img
-                // // src="https://img.freepik.com/free-vector/world-blood-donor-day-concept_23-2148482368.jpg"
-                // className="img-fluid rounded shadow"
-                // alt="Blood Donation"
-              />
-
-            </div>
+            <Link
+              to="/donor-register"
+              className="btn btn-light"
+            >
+              Become a Donor
+            </Link>
 
           </div>
 
         </div>
       </section>
 
-      {/* Features */}
 
-      <section className="container py-5">
+      {/* Quick Action Tiles */}
+      <div className="container gov-tile-grid">
 
-        <h2 className="text-center fw-bold mb-5">
-          Why Choose BloodConnect?
-        </h2>
+        <div className="row g-3">
 
-        <div className="row">
+          {tiles.map((tile, index) => (
+            <div
+              className="col-6 col-md-4 col-lg-2"
+              key={index}
+            >
+              <Link
+                to={tile.to}
+                className="gov-tile text-decoration-none"
+              >
 
+                <span className="tile-icon">
+                  {tile.icon}
+                </span>
+
+                <strong>
+                  {tile.title}
+                </strong>
+
+                <span>
+                  {tile.desc}
+                </span>
+
+              </Link>
+            </div>
+          ))}
+
+        </div>
+
+      </div>
+
+
+      {/* About This Portal */}
+      <section className="container py-5 mt-3">
+
+        <div className="gov-section-title">
+
+          <h2>
+            About This Portal
+          </h2>
+
+          <p>
+            How the coordination workflow operates end to end
+          </p>
+
+        </div>
+
+
+        <div className="row g-4">
+
+          {/* Step 1 */}
           <div className="col-md-4">
 
-            <div className="card border-0 shadow-lg p-4 text-center">
+            <div className="workflow-card p-4 bg-white border h-100">
 
-              <FaHeartbeat
-                size={50}
-                className="text-danger mx-auto mb-3"
-              />
+              <h5
+                className="fw-bold"
+                style={{ color: "var(--gov-navy)" }}
+              >
+                1. Register &amp; Screen
+              </h5>
 
-              <h4>Emergency Help</h4>
-
-              <p>
-
-                Raise urgent blood requests
-                within seconds.
-
+              <p className="text-muted mb-0">
+                Donors register and complete a short eligibility
+                pre-screening before visiting a center.
               </p>
 
             </div>
 
           </div>
 
+
+          {/* Step 2 */}
           <div className="col-md-4">
 
-            <div className="card border-0 shadow-lg p-4 text-center">
+            <div className="workflow-card p-4 bg-white border h-100">
 
-              <FaTint
-                size={50}
-                className="text-danger mx-auto mb-3"
-              />
+              <h5
+                className="fw-bold"
+                style={{ color: "var(--gov-navy)" }}
+              >
+                2. Discover &amp; Book
+              </h5>
 
-              <h4>Verified Donors</h4>
-
-              <p>
-
-                Find blood donors easily
-                with just one click.
-
+              <p className="text-muted mb-0">
+                Search verified blood banks by city and book an
+                appointment for donation.
               </p>
 
             </div>
 
           </div>
 
+
+          {/* Step 3 */}
           <div className="col-md-4">
 
-            <div className="card border-0 shadow-lg p-4 text-center">
+            <div className="workflow-card p-4 bg-white border h-100">
 
-              <FaUserFriends
-                size={50}
-                className="text-danger mx-auto mb-3"
-              />
+              <h5
+                className="fw-bold"
+                style={{ color: "var(--gov-navy)" }}
+              >
+                3. Match in Emergencies
+              </h5>
 
-              <h4>Community</h4>
-
-              <p>
-
-                Connect hospitals,
-                donors and patients together.
-
+              <p className="text-muted mb-0">
+                Urgent requests are matched against all medically
+                compatible donor blood groups, not exact matches only.
               </p>
 
             </div>
@@ -148,7 +212,8 @@ function Home() {
         </div>
 
       </section>
-    </>
+
+    </div>
   );
 }
 

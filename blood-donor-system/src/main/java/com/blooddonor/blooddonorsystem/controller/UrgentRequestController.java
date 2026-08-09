@@ -1,43 +1,25 @@
 package com.blooddonor.blooddonorsystem.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.blooddonor.blooddonorsystem.model.Donor;
 import com.blooddonor.blooddonorsystem.model.UrgentRequest;
 import com.blooddonor.blooddonorsystem.service.UrgentRequestService;
 
 @RestController
 @RequestMapping("/api/urgent-requests")
-@CrossOrigin(origins = "http://  vlocalhost:5173")
+@CrossOrigin(origins = "${app.cors.allowed-origin}")
 public class UrgentRequestController {
+    @Autowired private UrgentRequestService urgentRequestService;
 
-    @Autowired
-    private UrgentRequestService urgentRequestService;
-
-    // Create a new urgent request
     @PostMapping
-    public UrgentRequest createRequest(@RequestBody UrgentRequest request) {
-        return urgentRequestService.createRequest(request);
-    }
+    public UrgentRequest createRequest(@RequestBody UrgentRequest request) { return urgentRequestService.createRequest(request); }
 
-    // Get all active requests
+    // Emergency requests are operational/admin data and are intentionally not public.
     @GetMapping
-    public List<UrgentRequest> getActiveRequests() {
-        return urgentRequestService.getActiveRequests();
-    }
+    public List<UrgentRequest> getActiveRequests() { return urgentRequestService.getActiveRequests(); }
 
-    // Get matching donors for a specific request
     @GetMapping("/{id}/matches")
-    public List<Donor> getMatchingDonors(@PathVariable Long id) {
-        return urgentRequestService.findMatchingDonors(id);
-    }
+    public List<Donor> getMatchingDonors(@PathVariable Long id) { return urgentRequestService.findMatchingDonors(id); }
 }

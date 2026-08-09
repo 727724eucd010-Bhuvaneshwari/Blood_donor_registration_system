@@ -1,220 +1,66 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaArrowRight, FaEnvelope, FaLock, FaPhone, FaUser } from "react-icons/fa";
 import authService from "../services/authService";
 
 function Register() {
-
   const navigate = useNavigate();
+  const [form, setForm] = useState({ fullName:"", email:"", phoneNumber:"", password:"", confirmPassword:"" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-
-    name: "",
-
-    email: "",
-
-    password: "",
-
-    role: "USER"
-
-  });
-
-  const handleChange = (e) => {
-
-    setFormData({
-
-      ...formData,
-
-      [e.target.name]: e.target.value
-
-    });
-
-  };
-
-  const handleSubmit = async (e) => {
-
+  const submit = async (e) => {
     e.preventDefault();
-
+    if (form.password.length < 8) return setError("Password must contain at least 8 characters.");
+    if (form.password !== form.confirmPassword) return setError("Passwords do not match.");
+    setError(""); setLoading(true);
     try {
-
-      await authService.register(formData);
-
-      alert("Registration Successful");
-
-      navigate("/login");
-
-    } catch (error) {
-
-      alert("Registration Failed");
-
-    }
-
+      await authService.register({ fullName:form.fullName, email:form.email, phoneNumber:form.phoneNumber, password:form.password });
+      navigate("/dashboard", { replace:true });
+    } catch (err) {
+      setError(err.response?.data?.error || "Registration failed.");
+    } finally { setLoading(false); }
   };
 
-  return (
-
-    <div
-      className="container-fluid"
-      style={{
-        minHeight: "90vh",
-        background: "#f8f9fa"
-      }}
-    >
-
-      <div className="row">
-
-        <div
-          className="col-lg-5 text-white d-flex align-items-center"
-          style={{
-            background:
-              "linear-gradient(to bottom,#dc3545,#b71c1c)"
-          }}
-        >
-
-          <div className="p-5">
-
-            <h1 className="display-5 fw-bold">
-
-              Become a Donor ❤️
-
-            </h1>
-
-            <p className="lead mt-4">
-
-              Register yourself and become
-              part of our BloodConnect family.
-
-            </p>
-
-          </div>
-
-        </div>
-
-        <div className="col-lg-7">
-
-          <div
-            className="card shadow-lg border-0 mx-auto mt-5"
-            style={{
-              maxWidth: "600px",
-              borderRadius: "20px"
-            }}
-          >
-
-            <div className="card-body p-5">
-
-              <h2 className="text-center text-danger mb-4">
-
-                Register
-
-              </h2>
-
-              <form onSubmit={handleSubmit}>
-
-                <div className="mb-3">
-
-                  <label>Name</label>
-
-                  <input
-                    className="form-control"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-
-                </div>
-
-                <div className="mb-3">
-
-                  <label>Email</label>
-
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-
-                </div>
-
-                <div className="mb-3">
-
-                  <label>Password</label>
-
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-
-                </div>
-
-                <div className="mb-4">
-
-                  <label>Role</label>
-
-                  <select
-                    className="form-select"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-
-                    <option value="USER">
-
-                      USER
-
-                    </option>
-
-                    <option value="ADMIN">
-
-                      ADMIN
-
-                    </option>
-
-                  </select>
-
-                </div>
-
-                <button
-                  className="btn btn-danger w-100"
-                >
-
-                  Register
-
-                </button>
-
-              </form>
-
-              <p className="text-center mt-4">
-
-                Already have an account?
-
-                <Link
-                  to="/login"
-                  className="ms-2"
-                >
-                  Login
-                </Link>
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
+  const field = (name, icon, type="text", placeholder="") => (
+    <div className="input-icon"><span>{icon}</span><input type={type} placeholder={placeholder} value={form[name]} onChange={e=>setForm({...form,[name]:e.target.value})} required /></div>
   );
 
+  return (
+    <div className="auth-page">
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-9">
+            <div className="auth-shell">
+              <div className="auth-side register-side">
+                <span className="auth-logo">🩸</span>
+                <span className="eyebrow">JOIN THE NETWORK</span>
+                <h1>One account.<br/>More ways to help.</h1>
+                <p>Register once and manage your donor journey, appointments and emergency responses from one secure dashboard.</p>
+                <div className="donor-quote">“The easiest donation is the one you were ready for.”</div>
+              </div>
+              <div className="auth-form">
+                <span className="eyebrow dark">CREATE ACCOUNT</span>
+                <h2>Become part of the network</h2>
+                {error && <div className="alert alert-danger border-0">{error}</div>}
+                <form onSubmit={submit}>
+                  <label>Full name</label>{field("fullName", <FaUser />, "text", "Your full name")}
+                  <label>Email</label>{field("email", <FaEnvelope />, "email", "you@example.com")}
+                  <label>Phone number</label>{field("phoneNumber", <FaPhone />, "tel", "10-digit mobile number")}
+                  <div className="row">
+                    <div className="col-md-6"><label>Password</label>{field("password", <FaLock />, "password", "At least 8 characters")}</div>
+                    <div className="col-md-6"><label>Confirm password</label>{field("confirmPassword", <FaLock />, "password", "Repeat password")}</div>
+                  </div>
+                  <div className="security-note mt-3">🔒 Your password is stored using BCrypt. Public registration can only create a DONOR account; administrator access is never self-selectable.</div>
+                  <button className="btn btn-danger btn-lg w-100 rounded-pill mt-3" disabled={loading}>{loading ? "Creating account..." : <>Create account <FaArrowRight className="ms-2" /></>}</button>
+                </form>
+                <p className="text-muted mt-4 mb-0">Already registered? <Link to="/login">Sign in</Link></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
 export default Register;

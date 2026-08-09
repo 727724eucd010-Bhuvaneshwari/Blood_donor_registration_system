@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f5f7fa;
+  background: #f7f4f4;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -51,7 +51,7 @@ a {
 
 .hero-section {
   min-height: 85vh;
-  background: linear-gradient(135deg, #dc3545, #b71c1c);
+  background: linear-gradient(135deg, #8f1d2c, #741b1b);
   display: flex;
   align-items: center;
 }
@@ -88,11 +88,11 @@ a {
 }
 
 .btn-danger {
-  background: #dc3545;
+  background: #8f1d2c;
 }
 
 .btn-danger:hover {
-  background: #bb2d3b;
+  background: #6f111c;
 }
 
 /* =========================
@@ -101,7 +101,7 @@ a {
 
 .login-left,
 .register-left {
-  background: linear-gradient(135deg, #dc3545, #b71c1c);
+  background: linear-gradient(135deg, #8f1d2c, #741b1b);
   color: white;
 }
 
@@ -114,7 +114,7 @@ a {
 .form-control:focus,
 .form-select:focus {
   box-shadow: none;
-  border-color: #dc3545;
+  border-color: #8f1d2c;
 }
 
 /* =========================
@@ -208,8 +208,87 @@ footer hr {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #dc3545;
+  background: #8f1d2c;
   border-radius: 20px;
+}
+
+/* =========================
+   SEARCH HERO (Donor Search)
+========================= */
+
+.search-hero {
+  background: linear-gradient(135deg, #8f1d2c, #741b1b);
+  padding: 70px 0 110px;
+  color: white;
+}
+
+.search-hero h1 {
+  font-weight: bold;
+}
+
+.search-panel {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  padding: 28px;
+  margin-top: -80px;
+  position: relative;
+  z-index: 2;
+}
+
+.search-panel .form-select,
+.search-panel .form-control {
+  height: 50px;
+  border-radius: 10px;
+}
+
+/* =========================
+   DONOR CARD
+========================= */
+
+.donor-card {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.donor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(220, 53, 69, 0.2) !important;
+}
+
+.donor-card-header {
+  background: linear-gradient(135deg, #fff5f5, #ffe3e3);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.donor-blood-badge {
+  background: #8f1d2c;
+  color: white;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.custom-pagination .page-item .page-link {
+  border-radius: 8px !important;
+  margin: 0 4px;
+  color: #8f1d2c;
+  border: 1px solid #f1c0c5;
+}
+
+.custom-pagination .page-item.active .page-link {
+  background: #8f1d2c;
+  border-color: #8f1d2c;
+  color: white;
 }
 
 /* =========================

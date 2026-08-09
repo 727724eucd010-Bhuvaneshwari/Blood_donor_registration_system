@@ -12,7 +12,7 @@ import com.blooddonor.blooddonorsystem.service.EligibilityService;
 
 @RestController
 @RequestMapping("/api/eligibility")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${app.cors.allowed-origin}")
 public class EligibilityController {
 
     @Autowired

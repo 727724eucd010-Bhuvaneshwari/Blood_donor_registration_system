@@ -1,58 +1,23 @@
 package com.blooddonor.blooddonorsystem.util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class BloodCompatibility {
+public final class BloodCompatibility {
+    private BloodCompatibility() { }
 
     public static List<String> getCompatibleDonorGroups(String recipientBloodGroup) {
-
-        List<String> compatibleGroups = new ArrayList<>();
-
-        if (recipientBloodGroup.equals("O-")) {
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("O+")) {
-            compatibleGroups.add("O+");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("A-")) {
-            compatibleGroups.add("A-");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("A+")) {
-            compatibleGroups.add("A+");
-            compatibleGroups.add("A-");
-            compatibleGroups.add("O+");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("B-")) {
-            compatibleGroups.add("B-");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("B+")) {
-            compatibleGroups.add("B+");
-            compatibleGroups.add("B-");
-            compatibleGroups.add("O+");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("AB-")) {
-            compatibleGroups.add("AB-");
-            compatibleGroups.add("A-");
-            compatibleGroups.add("B-");
-            compatibleGroups.add("O-");
-        }
-        else if (recipientBloodGroup.equals("AB+")) {
-            compatibleGroups.add("AB+");
-            compatibleGroups.add("AB-");
-            compatibleGroups.add("A+");
-            compatibleGroups.add("A-");
-            compatibleGroups.add("B+");
-            compatibleGroups.add("B-");
-            compatibleGroups.add("O+");
-            compatibleGroups.add("O-");
-        }
-
-        return compatibleGroups;
+        if (recipientBloodGroup == null) return List.of();
+        return switch (recipientBloodGroup.trim().toUpperCase()) {
+            case "O-" -> List.of("O-");
+            case "O+" -> List.of("O+", "O-");
+            case "A-" -> List.of("A-", "O-");
+            case "A+" -> List.of("A+", "A-", "O+", "O-");
+            case "B-" -> List.of("B-", "O-");
+            case "B+" -> List.of("B+", "B-", "O+", "O-");
+            case "AB-" -> List.of("AB-", "A-", "B-", "O-");
+            case "AB+" -> Arrays.asList("AB+", "AB-", "A+", "A-", "B+", "B-", "O+", "O-");
+            default -> List.of();
+        };
     }
 }

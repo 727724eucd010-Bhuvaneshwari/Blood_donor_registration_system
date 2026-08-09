@@ -1,31 +1,27 @@
 package com.blooddonor.blooddonorsystem.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import com.blooddonor.blooddonorsystem.dto.AuthResponse;
 import com.blooddonor.blooddonorsystem.dto.LoginRequest;
 import com.blooddonor.blooddonorsystem.dto.RegisterRequest;
 import com.blooddonor.blooddonorsystem.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${app.cors.allowed-origin}")
 public class AuthController {
-
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+    public AuthController(AuthService authService) { this.authService = authService; }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }

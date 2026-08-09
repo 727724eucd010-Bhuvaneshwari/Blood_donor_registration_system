@@ -16,7 +16,7 @@ import com.blooddonor.blooddonorsystem.service.BloodStockService;
 
 @RestController
 @RequestMapping("/api/stock")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${app.cors.allowed-origin}")
 public class BloodStockController {
 
     @Autowired
